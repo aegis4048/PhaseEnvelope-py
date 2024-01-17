@@ -171,6 +171,7 @@ docs/source/md_rst.ipynb
 .pdf
 *.pmx
 *.pmxexp
+**/*.pdf
 
 test
 asaa
