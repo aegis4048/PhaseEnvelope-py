@@ -168,8 +168,9 @@ notes.py
 tutorials/
 docs/source/md_rst.ipynb
 *.pdf
+.pdf
 *.pmx
 *.pmxexp
 
 test
-as
+asa
