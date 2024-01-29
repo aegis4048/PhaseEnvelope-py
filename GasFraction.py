@@ -4,14 +4,14 @@ import correlations
 
 class GasFraction(object):
 
-    def __init__(self, mw=None, sg=None, VABP=None, ghv=None, lhv=None, Pc=None, Tc=None, omega=None, Tb=None):
+    def __init__(self, mw=None, sg=None, VABP=None, ghv=None, nhv=None, Pc=None, Tc=None, omega=None, Tb=None):
         # Note that 'sg' is assumed to be 'sg_gas' and there's no 'api' attribute
         self.attributes = {
             'mw': mw,
             'sg_gas': sg,  # Renamed for clarity within the class that this is sg for gas
             'VABP': VABP,
             'ghv': ghv,
-            'lhv': lhv,
+            'nhv': nhv,
             'Pc': Pc,
             'Tc': Tc,
             'omega': omega,
@@ -23,8 +23,8 @@ class GasFraction(object):
             correlations.mw_sg_gas: ['mw', 'sg_gas'],
             correlations.mw_sg_liq: ['mw', '_sg_liq'],
             correlations.Tb_mw_sg: ['Tb', 'mw', '_sg_liq'],
-            correlations.gas_ghv_sg: ['ghv', 'sg'],
-            correlations.gas_lhv_sg: ['lhv', 'sg'],
+            correlations.gas_ghv_sg: ['ghv', 'sg_gas'],
+            correlations.gas_nhv_sg: ['nhv', 'sg_gas'],
         }
         self.resolve_dependencies()
 
@@ -74,8 +74,10 @@ class GasFraction(object):
         return args
 
     def get_initial_guess(self, variable):
-        initial_guesses = {'mw': 100, 'api': 30, 'sg_liq': 0.8, 'sg_gas': 0.6, 'Tb': 300, 'ghv': 3000, 'lhv': 3000}
+        initial_guesses = {'mw': 100, 'api': 30, 'sg_liq': 0.8, 'sg_gas': 0.6, 'Tb': 300, 'ghv': 3000, 'nhv': 3000}
         return initial_guesses.get(variable, 1.0)
+
+    
 
 
 # Example usage
@@ -92,11 +94,15 @@ print(a.attributes)
 a = GasFraction(mw=175.1, sg=6.04)
 print(a.attributes)
 
-print('------------ Upton Axis ------------')
+print('------------ Upton Axis C7+ ------------')
 a = GasFraction(mw=None, sg=3.464)
 print(a.attributes)
 
 a = GasFraction(mw=96.82, sg=None)
+print(a.attributes)
+
+print('------------ Upton Axis Whole ------------')
+a = GasFraction(mw=59.44, sg=2.126)
 print(a.attributes)
 
 print('------------ Brazos Gas ------------')
@@ -107,6 +113,17 @@ a = GasFraction(mw=None, sg=3.1228)
 print(a.attributes)
 
 a = GasFraction(mw=90.161, sg=3.1228)
+print(a.attributes)
+
+a = GasFraction(sg=1.035)
+print(a.attributes)
+
+print('------------ Colorado Facility ------------')
+a = GasFraction(sg=1.1)
+print(a.attributes)
+
+print('------------ Test ------------')
+a = GasFraction(sg=0.5537)
 print(a.attributes)
 
 
