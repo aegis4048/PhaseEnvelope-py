@@ -77,7 +77,7 @@ class GasFraction(object):
         initial_guesses = {'mw': 100, 'api': 30, 'sg_liq': 0.8, 'sg_gas': 0.6, 'Tb': 300, 'ghv': 3000, 'nhv': 3000}
         return initial_guesses.get(variable, 1.0)
 
-    
+
 
 
 # Example usage
@@ -121,6 +121,11 @@ print(a.attributes)
 print('------------ Colorado Facility ------------')
 a = GasFraction(sg=1.1)
 print(a.attributes)
+
+print('------------ Shamrock ------------')
+a = GasFraction(sg=3.01810, mw=87.665)
+print(a.attributes)
+
 
 print('------------ Test ------------')
 a = GasFraction(sg=0.5537)
