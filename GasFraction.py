@@ -2,6 +2,10 @@ import numpy as np
 from scipy.optimize import newton
 import correlations
 
+
+# I need to implement step-wise solver for Tb. For correlations with large variances
+
+
 class GasFraction(object):
 
     def __init__(self, mw=None, sg=None, VABP=None, ghv=None, nhv=None, Pc=None, Tc=None, omega=None, Tb=None):
@@ -99,6 +103,15 @@ a = GasFraction(mw=None, sg=3.464)
 print(a.attributes)
 
 a = GasFraction(mw=96.82, sg=None)
+print(a.attributes)
+
+a = GasFraction(mw=96.82, sg=3.464)
+print(a.attributes)
+
+a = GasFraction(ghv=5131)
+print(a.attributes)
+
+a = GasFraction(ghv=7507.1)
 print(a.attributes)
 
 print('------------ Upton Axis Whole ------------')
