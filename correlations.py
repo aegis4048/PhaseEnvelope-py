@@ -30,6 +30,7 @@ def gas_ghv_sg(ghv, sg):
     """
     return -ghv + 229.60 + 1321 * sg + 207.97 * sg**2 - 57.084 * sg**3
 
+
 def gas_nhv_sg(nhv, sg):
     """
     notes: net heating value (nhv, also known has low heating value) vs. gas specific gravity for fuel gases

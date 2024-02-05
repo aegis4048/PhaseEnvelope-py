@@ -12,6 +12,117 @@ import timeit
 from scipy.optimize import newton
 import correlations
 
+# StateCordell VRU
+statecordell = dict([
+    ('hydrogen sulfide', 0.001),
+    ('nitrogen', 0.1590),
+    ('carbon dioxide', 0.6910),
+    ('methane', 51.0870),
+    ('ethane', 19.9110),
+    ('propane', 14.8830),
+    ('isobutane', 2.6940),
+    ('n-butane', 6.0390),
+    ('isopentane', 1.4840),
+    ('n-pentane', 1.5790),
+    ('fractions', 1.4720),
+])
+
+# Thurmond
+thurmond = dict([
+    ('carbon dioxide', 0.261),
+    ('nitrogen', 1.295),
+    ('methane', 86.878),
+    ('ethane', 5.659),
+    ('propane', 3.237),
+    ('isobutane', 0.405),
+    ('n-butane', 1.051),
+    ('neopentane', 0),
+    ('isopentane', 0.306),
+    ('n-pentane', 0.381),
+    ('fractions', 0.527),
+])
+
+# Fesco - Combs, VRU Discharge Gas
+combs_vru_discharge = dict([
+    ('hydrogen sulfide', 0.001),
+    ('nitrogen', 0.103),
+    ('carbon dioxide', 1.485),
+    ('methane', 34.352),
+    ('ethane', 24.949),
+    ('propane', 24.893),
+    ('isobutane', 3.633),
+    ('n-butane', 7.661),
+    ('neopentane', 0.017),
+    ('isopentane', 1.240),
+    ('n-pentane', 1.108),
+    ('hexane', 0.409),
+    ('fractions', 0.15),
+])
+
+# Storey Ranch
+storey_ranch = dict([
+    ('hydrogen sulfide', 0.001),
+    ('nitrogen', 0),
+    ('carbon dioxide', 0.428),
+    ('methane', 1.078),
+    ('ethane', 8.520),
+    ('propane', 25.730),
+    ('isobutane', 6.757),
+    ('n-butane', 23.3999),
+    ('neopentane', 0.056),
+    ('i-pentane', 8.021),
+    ('n-pentane', 9.569),
+    ('hexane', 9.467),
+    ('fractions', 6.975),
+])
+
+# Kendall - Mirror VRU Discharge
+mirror_vru = dict([
+    ('hydrogen sulfide', 0.01),
+    ('nitrogen', 0.0810),
+    ('carbon dioxide', 0.3810),
+    ('methane', 18.5830),
+    ('ethane', 22.6350),
+    ('propane', 30.2270),
+    ('isobutane', 5.5680),
+    ('n-butane', 14.5620),
+    ('isopentane', 3.2510),
+    ('n-pentane', 2.7770),
+    ('fractions', 1.9250),
+])
+
+# Brazos Gas
+brazos = dict([
+    ('hydrogen sulfide', 0.001),
+    ('nitrogen', 2.304),
+    ('carbon dioxide', 1.505),
+    ('methane', 71.432),
+    ('ethane', 11.732),
+    ('propane', 7.595),
+    ('isobutane', 0.827),
+    ('n-butane', 2.540),
+    ('i-pentane', 0.578),
+    ('n-pentane', 0.597),
+    ('fractions', 0.889),
+])
+
+# Fesco - Combs, Sep Gas
+combs_sep_gas = dict([
+    ('hydrogen sulfide', 0),
+    ('nitrogen', 0.135),
+    ('carbon dioxide', 1.707),
+    ('methane', 47.167),
+    ('ethane', 20.530),
+    ('propane', 18.116),
+    ('isobutane', 2.928),
+    ('n-butane', 6.460),
+    ('neopentane', 0.020),
+    ('isopentane', 1.088),
+    ('n-pentane', 0.965),
+    ('hexane', 0.540),
+    ('fractions', 0.344),
+])
+
 
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
@@ -139,117 +250,7 @@ df = pd.read_pickle("GPA 2145-16 Compound Properties Table - English.pkl")
 
 #df = df[df['Compound'] != 'nitrogen']
 
-# Brazos Gas
-comp_dict = dict([
-    ('hydrogen sulfide', 0.001),
-    ('nitrogen', 2.304),
-    ('carbon dioxide', 1.505),
-    ('methane', 71.432),
-    ('ethane', 11.732),
-    ('propane', 7.595),
-    ('isobutane', 0.827),
-    ('n-butane', 2.540),
-    ('i-pentane', 0.578),
-    ('n-pentane', 0.597),
-    ('fractions', 0.889),
-])
-
-# StateCordell VRU
-comp_dict = dict([
-    ('hydrogen sulfide', 0.001),
-    ('nitrogen', 0.1590),
-    ('carbon dioxide', 0.6910),
-    ('methane', 51.0870),
-    ('ethane', 19.9110),
-    ('propane', 14.8830),
-    ('isobutane', 2.6940),
-    ('n-butane', 6.0390),
-    ('isopentane', 1.4840),
-    ('n-pentane', 1.5790),
-    ('fractions', 1.4720),
-])
-
-# Thurmond
-comp_dict = dict([
-    ('carbon dioxide', 0.261),
-    ('nitrogen', 1.295),
-    ('methane', 86.878),
-    ('ethane', 5.659),
-    ('propane', 3.237),
-    ('isobutane', 0.405),
-    ('n-butane', 1.051),
-    ('neopentane', 0),
-    ('isopentane', 0.306),
-    ('n-pentane', 0.381),
-    ('fractions', 0.527),
-])
-
-# Fesco - Combs, HC Liq - HT
-comp_dict = dict([
-    ('hydrogen sulfide', 0.001),
-    ('nitrogen', 0.103),
-    ('carbon dioxide', 1.485),
-    ('methane', 34.352),
-    ('ethane', 24.949),
-    ('propane', 24.893),
-    ('isobutane', 3.633),
-    ('n-butane', 7.661),
-    ('neopentane', 0.017),
-    ('isopentane', 1.240),
-    ('n-pentane', 1.108),
-    ('hexane', 0.409),
-    ('fractions', 0.15),
-])
-
-# Kendall - Mirror VRU Discharge
-comp_dict = dict([
-    ('hydrogen sulfide', 0.01),
-    ('nitrogen', 0.0810),
-    ('carbon dioxide', 0.3810),
-    ('methane', 18.5830),
-    ('ethane', 22.6350),
-    ('propane', 30.2270),
-    ('isobutane', 5.5680),
-    ('n-butane', 14.5620),
-    ('isopentane', 3.2510),
-    ('n-pentane', 2.7770),
-    ('fractions', 1.9250),
-])
-
-# Fesco - Combs, Sep Gas
-comp_dict = dict([
-    ('hydrogen sulfide', 0),
-    ('nitrogen', 0.135),
-    ('carbon dioxide', 1.707),
-    ('methane', 47.167),
-    ('ethane', 20.530),
-    ('propane', 18.116),
-    ('isobutane', 2.928),
-    ('n-butane', 6.460),
-    ('neopentane', 0.020),
-    ('isopentane', 1.088),
-    ('n-pentane', 0.965),
-    ('hexane', 0.540),
-    ('fractions', 0.344),
-])
-
-# Storey Ranch
-comp_dict = dict([
-    ('hydrogen sulfide', 0.001),
-    ('nitrogen', 0),
-    ('carbon dioxide', 0.428),
-    ('methane', 1.078),
-    ('ethane', 8.520),
-    ('propane', 25.730),
-    ('isobutane', 6.757),
-    ('n-butane', 23.3999),
-    ('neopentane', 0.056),
-    ('i-pentane', 8.021),
-    ('n-pentane', 9.569),
-    ('hexane', 9.467),
-    ('fractions', 6.975),
-])
-
+comp_dict = combs_sep_gas
 comp_dict = normalize_composition(comp_dict)
 
 comp_dict_pure = {}
@@ -272,9 +273,9 @@ check_properties_exists(constants_pure)
 ghvs_pure = get_ghvs_pure_compounds(constants_pure, df_GPA=df)
 wghtd_ghvs_pure = ghvs_pure * zs_pure
 
-ghv = 3417
+ghv = 1736
 
-ghv_fraction = round((ghv - sum(wghtd_ghvs_pure)) / zs_fraction, 1)
+ghv_fraction = (ghv - sum(wghtd_ghvs_pure)) / zs_fraction
 whgtd_ghv_fraction = ghv_fraction * zs_fraction
 
 ###########
@@ -286,4 +287,5 @@ df_ghvs_table = pd.DataFrame(data=[comps_pure, constants_pure.CASs, ghvs_pure, z
 df_ghvs_table.columns = ['Compound Name', 'CAS', 'Ideal Gas GHV [Btu/scf]', 'Mole Frac. [%]', 'Wghtd. Ideal Gas GVH [Btu/scf]']
 df_ghvs_table.loc[len(df_ghvs_table)] = fraction_row
 df_ghvs_table.loc[len(df_ghvs_table)] = sum_row
+
 print(df_ghvs_table.to_string())

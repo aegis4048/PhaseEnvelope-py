@@ -8,6 +8,13 @@ constants = {
     "MW_AIR": 28.97,  # molecular weight of air at standard conditions, g/mol
     "RHO_WATER": 999.0170125317171,  # density of water @60F, 1atm (kg/m^3) according to IAPWS-95 standard. Calculate rho at different conditions by:  chemicals.iapws95_rho(288.706, 101325) (K, pascal)
 }
+GPA_table_column_mapping = {
+    'ghv': 'Gross Heating Value Ideal Gas [Btu/ft^3]',
+    'sg_liq_60F': 'Liq. Relative Density @60F:1atm',
+    'sg_gas_60F': 'Ideal Gas Relative Density @60F:1atm',
+    'mw': 'Molar Mass [g/mol]',
+
+}
 
 def update_config(user_config):
     """
